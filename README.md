@@ -1,4 +1,4 @@
-# BD
+#BD
 Este branch es para desarrollar las versiones de la base de datos para sistema del Kiosco y futuros negocios de la familia Casique.
 
 #############################################################################################################################
@@ -29,7 +29,8 @@ Reglas Generales:
  2. No debe ser jamás igual o inferior al campo "FECHA_CREACION".
  3. No debe ser jamás un valor inferior al campo "FECHA_ACTUALIZACION".
 - Si el campo "FECHA_ELIMINACION" tiene valor, ese dato no debe ser tomado en cuenta para ninguna lista que tenga valores usables en el sistema. A excepción de listas de datos que lo requieran explicítamente.
-#############################################################################################################################TABLA: USUARIOS
+#############################################################################################################################
+TABLA: USUARIOS
 Contiene información de todos los usuarios registrados en el sistema. Listado completo de los usuarios, se encuentran clientes, vendedores, empleados y administradores. La información registrada es vital para obtener los datos en caso de utilizar facturación.
 
 ID_USUARIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar a cada usuario y es la clave primaria.
@@ -52,7 +53,8 @@ Reglas USUARIOS:
 - El dato "ID_ESTADO" depende de la tabla "ESTADOS".
 - El dato "ID_ROL" depende de la tabla "ROLES".
 - Cada usuario solo debe tener un "ID_ROL" de acuerdo a las reglas de negocio de la tabla "ROLES".
-#############################################################################################################################TABLA: ESTADOS
+#############################################################################################################################
+TABLA: ESTADOS
 Contiene el listado de los estados para todos los elementos del sistema. Pueden aplicar para los usuarios, proveedores, productos, entre otros.
 Los estados son:
 - Activo: Estado para todos los elementos que tiene todas las opciones disponibles en el sistema y puede ser utilizado por todas las entidades que tengan asignado un estado.
@@ -73,7 +75,8 @@ Reglas ESTADOS:
 - El estado "Bloqueado" en el caso de los proveedores aplica cuando se tienen malas experiencias o se ha descartado una futura negociación.
 - El estado "Inactivo" en el caso de los usuarios aplica cuando tienen más de un año sin iniciar sesión.
 - El estado "Inactivo" en el caso de los proveedores aplica cuando no se ha realizado ningún pedido desde hace un año.
-#############################################################################################################################TABLA: ROLES
+#############################################################################################################################
+TABLA: ROLES
 Contiene el listado de roles de usuarios soportado por el modelo de negocios. Cada uno de ellos incluye a su predecesor.
 Corresponden a:
 - Administrador: Súper usuario del sistema, no tiene límites para crear, actualizar, consultar y eliminar lógicamente información. Es el único con privilegios para mover de estados a los usuarios y vendedores. (Incluye funciones de los roles Cliente, Vendedor y Empleado).
@@ -94,7 +97,8 @@ Reglas ROLES:
 - Si se tiene un rol con mayor funcionalidad, eventualmente se heredan las anteriores.
 - Los estados con valor 1 corresponden a Activos.
 - Los estados con valor 0 corresponden a Inactivos.
-#############################################################################################################################TABLA: PROVEEDORES
+#############################################################################################################################
+TABLA: PROVEEDORES
 Contiene listado de las empresas y/o proveedores independientes que despachan productos en el Kiosco.
 
 ID_PROVEEDOR: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada proveedor agregado en la aplicación y es la clave primaria.
@@ -111,7 +115,8 @@ Reglas PROVEEDORES:
 - Los usuarios con rol "Vendedor" tiene como opción no pertenecer a ninguna empresa.
 - Los proveedores no son exclusivos de un producto específico.
 - El dato "ID_ESTADO" depende de la tabla "ESTADOS".
-#############################################################################################################################TABLA: CONTACTO_PROVEEDOR
+#############################################################################################################################
+TABLA: CONTACTO_PROVEEDOR
 Contiene información adicional de los proveedores como:
 - Números telefónicos.
 - Correos electrónicos.
@@ -132,7 +137,8 @@ Reglas CONTACTO_PROVEEDOR:
 - El dato "ID_USUARIO" depende de la tabla "USUARIOS".
 - Persona de contacto siempre debe ser supervisor a excepción del caso donde el proveedor sea independiente, en cuyo caso aplica el mismo vendedor.
 - Es necesario al menos un número telefónico y correo electrónico como contacto en caso que el vendedor preste un mal servicio u otro inconveniente.
-#############################################################################################################################TABLA: TIPO_SERVICIOS
+#############################################################################################################################
+TABLA: TIPO_SERVICIOS
 Contiene información de los servicios utilizados por el Kiosco y suministrado por los proveedores. Por ejemplo revistas, tarjetas telefónicas, golosinas nacionales, barajitas, entre otros.
 
 ID_TIPO_SERVICIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada tipo de servicio agregado en la aplicación y es la clave primaria.
@@ -145,7 +151,8 @@ FECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eli
 Reglas TIPO_SERVICIOS:
 - Un proveedor puede suministrar más de un tipo de servicio.
 - El mismo tipo de servicio lo puede ofrecer más de un proveedor.
-#############################################################################################################################TABLA: PROVEEDORES_TIPO_SERVICIOS
+#############################################################################################################################
+TABLA: PROVEEDORES_TIPO_SERVICIOS
 Tabla relacional que permite cumplir con las reglas de negocio de los tipos de servicios.
 
 PROVEEDORES_ID_PROVEEDOR: Valor relacionado con la tabla "PROVEEDORES", es un valor entero y obligatorio.
