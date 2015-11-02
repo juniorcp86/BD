@@ -1,0 +1,11 @@
+/*
+* NOMBRE BASE DE DATOS: KIOSCO
+* NOMBRE DE LA TABLA: ESTADOS
+* FECHA DE CREACIÓN: DD/MM/AAAA
+* CREADO POR: Junior Casique
+* FECHA DE ACTUALIZACIÓN: 
+* ACTUALIZADO POR: 
+* DESCRIPCIÓN: Script para realizar la eliminación de la tabla mencionada. Es el rollback del script 02_CREATE_TABLE_ESTADOS.sql
+*/
+
+DROP TABLE IF EXISTS KIOSCO.ESTADOS;
