@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.ESTADOS VALUES (DEFAULT,'Activo','Estado para todos los elementos que tiene todas las opciones disponibles en el sistema y puede ser utilizado por todas las entidades que tengan asignado un estado.',CURRENT_DATE(),NULL,NULL);
 INSERT INTO KIOSCO.ESTADOS VALUES (DEFAULT,'Bloqueado','Estado para todos los elementos que NO tienen permitido ingresar al sistema, han sido descartados para su uso por alguna falta o discrepancia en los datos. Estos elementos no pueden ser usados por ninguna entidad del sistema.',CURRENT_DATE(),NULL,NULL);

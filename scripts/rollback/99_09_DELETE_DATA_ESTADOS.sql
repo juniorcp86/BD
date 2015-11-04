@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 09_INSERT_DATA_ESTADOS.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DELETE FROM KIOSCO.ESTADOS WHERE ID_ESTADO = '1';
 DELETE FROM KIOSCO.ESTADOS WHERE ID_ESTADO = '2';

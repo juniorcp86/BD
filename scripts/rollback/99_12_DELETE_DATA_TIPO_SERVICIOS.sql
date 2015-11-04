@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 12_INSERT_DATA_TIPO_SERVICIOS.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DELETE FROM KIOSCO.TIPO_SERVICIOS WHERE ID_TIPO_SERVICIO = '1';
 DELETE FROM KIOSCO.TIPO_SERVICIOS WHERE ID_TIPO_SERVICIO = '2';

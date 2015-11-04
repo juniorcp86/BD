@@ -8,6 +8,6 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de la tabla mencionada. Es el rollback del script 07_CREATE_TABLE_CONTACTO_PROVEEDOR.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DROP TABLE IF EXISTS KIOSCO.CONTACTO_PROVEEDOR;

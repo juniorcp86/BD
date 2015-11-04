@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.USUARIOS VALUES (DEFAULT,'17641081','1','Junior Casique','juniorcp86@gmail.com','04241996265','1','1','1',NULL,CURRENT_DATE(),NULL,NULL);
 INSERT INTO KIOSCO.USUARIOS VALUES (DEFAULT,'5028631','1','Jesus Casique','jesuscasique55@gmail.com','04129935638','1','1','1',NULL,CURRENT_DATE(),NULL,NULL);

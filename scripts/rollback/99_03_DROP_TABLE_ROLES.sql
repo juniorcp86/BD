@@ -8,6 +8,6 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de la tabla mencionada. Es el rollback del script 03_CREATE_TABLE_ROLES.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DROP TABLE IF EXISTS KIOSCO.ROLES;

@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 11_INSERT_DATA_USUARIOS.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DELETE FROM KIOSCO.USUARIOS WHERE DOCUMENTO_IDENTIDAD = '17641081';
 DELETE FROM KIOSCO.USUARIOS WHERE DOCUMENTO_IDENTIDAD = '5028631';

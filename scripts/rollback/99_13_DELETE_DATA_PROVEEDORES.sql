@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 13_INSERT_DATA_PROVEEDORES.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DELETE FROM KIOSCO.PROVEEDORES WHERE RIF = 'J-294556507';
 DELETE FROM KIOSCO.PROVEEDORES WHERE RIF = 'J-000067481';

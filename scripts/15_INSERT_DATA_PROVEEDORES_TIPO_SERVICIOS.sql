@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.PROVEEDORES_TIPO_SERVICIOS VALUES ('1','1');
 INSERT INTO KIOSCO.PROVEEDORES_TIPO_SERVICIOS VALUES ('3','1');

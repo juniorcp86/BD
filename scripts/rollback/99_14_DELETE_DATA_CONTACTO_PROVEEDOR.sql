@@ -8,6 +8,6 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 14_INSERT_DATA_CONTACTO_PROVEEDOR.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DELETE FROM KIOSCO.CONTACTO_PROVEEDOR WHERE ID_CONTACTO = '1';

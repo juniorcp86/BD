@@ -8,6 +8,6 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de la tabla mencionada. Es el rollback del script 02_CREATE_TABLE_ESTADOS.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DROP TABLE IF EXISTS KIOSCO.ESTADOS;

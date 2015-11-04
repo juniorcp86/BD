@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.PROVEEDORES VALUES (DEFAULT,'J-294556507','Distribuida Careste, C.A.','1','1',CURRENT_DATE(),NULL,NULL);
 INSERT INTO KIOSCO.PROVEEDORES VALUES (DEFAULT,'J-000067481','C.A. Cigarrera Bigott','1','1',CURRENT_DATE(),NULL,NULL);

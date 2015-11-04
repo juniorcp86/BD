@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.ROLES VALUES (DEFAULT,'Administrador','Super usuario del sistema, no tiene límites para crear, actualizar, consultar y eliminar lógicamente información. Es el único con privilegios para mover de estados a los usuarios y vendedores. (Incluye funciones de los roles Cliente, Vendedor y Empleado).','1',CURRENT_DATE(),NULL,NULL);
 INSERT INTO KIOSCO.ROLES VALUES (DEFAULT,'Cliente','Usuario que solo debe tener cuentas por pagar o montos a su favor. Acceso solo a su información. (No incluye funciones de otros roles).','1',CURRENT_DATE(),NULL,NULL);

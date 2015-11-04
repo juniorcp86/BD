@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 10_INSERT_DATA_ROLES.sql
 */
 
-USE `KIOSCO`;
+USE KIOSCO;
 
 DELETE FROM KIOSCO.ROLES WHERE ID_ROL = '1';
 DELETE FROM KIOSCO.ROLES WHERE ID_ROL = '2';

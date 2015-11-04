@@ -8,6 +8,6 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.CONTACTO_PROVEEDOR VALUES (DEFAULT,'1','Doni','04241234567',NULL,NULL,'donilatin@hotmail.com',NULL,NULL);

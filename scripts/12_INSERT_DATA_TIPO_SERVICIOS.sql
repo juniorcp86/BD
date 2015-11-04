@@ -8,7 +8,7 @@
 * DESCRIPCIÓN: Script para realizar la inserción de datos en la tabla mencionada.
 */
 
-USE 'KIOSCO';
+USE KIOSCO;
 
 INSERT INTO KIOSCO.TIPO_SERVICIOS VALUES (DEFAULT,'Tarjetas telefónicas Movistar','Distribución de tarjetas telefónicas para Movistar.',CURRENT_DATE(),NULL,NULL);
 INSERT INTO KIOSCO.TIPO_SERVICIOS VALUES (DEFAULT,'Tarjetas telefónicas Movilnet','Distribución de tarjetas telefónicas para Movilnet.',CURRENT_DATE(),NULL,NULL);

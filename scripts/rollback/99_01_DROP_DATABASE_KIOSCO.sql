@@ -8,6 +8,4 @@
 * DESCRIPCIÓN: Script para realizar la eliminación de la base de datos KIOSCO. Es el rollback del script 01_CREATE_DATEBASE_KIOSCO.sql
 */
 
-USE `KIOSCO`;
-
 DROP DATABASE KIOSCO;
