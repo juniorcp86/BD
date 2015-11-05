@@ -181,25 +181,51 @@
 -- ID_USUARIO: Valor relacionado con la tabla "CUENTA", es un valor entero y obligatorio.
 -- ID_PRODUCTO: Valor relacionado con la tabla "PRODUCTOS", es un valor entero y obligatorio.
 -- TIPO_DETALLE: Identifica el tipo de detalle para sumar o restar montos, es un valor booleano y obligatorio.
+-- DESCRIPCION: Utilizado para almacenar información general cuando el producto seleccionado sea algo genérico y no se específiquen individualmente los productos, NO es obligatorio.
 -- MONTO_DETALLE: Valor decimal que contiene el costo del producto o abono en la cuenta, es un valor obligatorio.
 -- FECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.
 -- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas.
+-- FECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.
 -- 
 -- Reglas :
 -- - En valor "TIPO_DETALLE" corresponde 1 cuando se agrega algún producto y 0 cuando se hace un abono.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- TABLA: PRODUCTOS
--- Tabla que contiene total de la cuenta de cada usuario cliente. Debe estar relacionada con la tabla CUENTAS_DETALLE.
+-- Tabla que almacena el listado de productos de KIOSCO.
 -- 
--- ID_CUENTA_DETALLE: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada detalle de cuenta y es la clave primaria.
--- ID_CUENTA: Valor relacionado con la tabla "CUENTA", es un valor entero y obligatorio.
--- ID_USUARIO: Valor relacionado con la tabla "CUENTA", es un valor entero y obligatorio.
--- ID_PRODUCTO: Valor relacionado con la tabla "PRODUCTOS", es un valor entero y obligatorio.
--- TIPO_DETALLE: Identifica el tipo de detalle para sumar o restar montos, es un valor booleano y obligatorio.
--- MONTO_DETALLE: Valor decimal que contiene el costo del producto o abono en la cuenta, es un valor obligatorio.
+-- ID_PRODUCTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.
+-- NOMBRE_PRODUCTO: Identifica el tipo de detalle para sumar o restar montos, es un valor booleano y obligatorio.
+-- DESCRIPCION_PRODUCTO: Valor tipo texto que permite ingresar información adicional del producto, NO es un valor obligatorio.
+-- ID_ESTADO: Valor que indica el estado de un producto, es un valor booleano y es obligatorio.
 -- FECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.
--- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas.
+-- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada producto.
+-- FECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del producto, es un valor que solo se actualiza una vez, no es obligatorio al crear el producto.
 -- 
 -- Reglas :
--- - En valor "TIPO_DETALLE" corresponde 1 cuando se agrega algún producto y 0 cuando se hace un abono.
+-- - El mismo proudcto puede ser distribuido por más de un proveedor.
+-- - Muchos productos son distribuidos por muchos vendedores.
+-- - Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABLA: PROVEEDORES_PRODUCTOS
+-- Tabla que almacena las relaciones de los productos con los proveedores.
+-- 
+-- PROVEEDORES_ID_PROVEEDOR: Valor relacionado con la tabla "PROVEEDORES", es un valor entero y obligatorio.
+-- PRODUCTOS_ID_PRODUCTO: Valor relacionado con la tabla "PRODUCTOS", es un valor entero y obligatorio.
+-- 
+-- Reglas :
+-- - El mismo proudcto puede ser distribuido por más de un proveedor.
+-- - Muchos productos son distribuidos por muchos vendedores.
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABLA: IVA
+-- Tabla que almacena los IVA's antiguos y actual para realizar calculo de los precios.
+-- 
+-- ID_IVA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.
+-- PORCENTAJE_IVA: 
+-- ID_ESTADO: Valor que indica el estado de IVA, es un valor booleano y es obligatorio.
+-- FECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.
+-- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada IVA.
+-- FECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del IVA, es un valor que solo se actualiza una vez, no es obligatorio al registrar IVA.
+-- 
+-- Reglas :
+-- - Solo debe mantenerse un registro de IVA activo en la tabla.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
