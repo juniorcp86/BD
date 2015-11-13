@@ -170,7 +170,7 @@
 -- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas, es un valor opcional cuando se crea una nueva cuenta.
 -- FECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.
 -- 
--- Reglas :
+-- Reglas CUENTAS:
 -- - Un cliente no debe tener más de una cuenta abierta al mismo tiempo.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- TABLA: CUENTA_DETALLES
@@ -187,7 +187,7 @@
 -- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas.
 -- FECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.
 -- 
--- Reglas :
+-- Reglas CUENTA_DETALLES:
 -- - En valor "TIPO_DETALLE" corresponde 1 cuando se agrega algún producto y 0 cuando se hace un abono.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- TABLA: PRODUCTOS
@@ -201,7 +201,7 @@
 -- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada producto.
 -- FECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del producto, es un valor que solo se actualiza una vez, no es obligatorio al crear el producto.
 -- 
--- Reglas :
+-- Reglas PRODUCTOS:
 -- - El mismo proudcto puede ser distribuido por más de un proveedor.
 -- - Muchos productos son distribuidos por muchos vendedores.
 -- - Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.
@@ -212,7 +212,7 @@
 -- PROVEEDORES_ID_PROVEEDOR: Valor relacionado con la tabla "PROVEEDORES", es un valor entero y obligatorio.
 -- PRODUCTOS_ID_PRODUCTO: Valor relacionado con la tabla "PRODUCTOS", es un valor entero y obligatorio.
 -- 
--- Reglas :
+-- Reglas PROVEEDORES_PRODUCTOS:
 -- - El mismo proudcto puede ser distribuido por más de un proveedor.
 -- - Muchos productos son distribuidos por muchos vendedores.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -220,12 +220,29 @@
 -- Tabla que almacena los IVA's antiguos y actual para realizar calculo de los precios.
 -- 
 -- ID_IVA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.
--- PORCENTAJE_IVA: 
+-- PORCENTAJE_IVA: Corresponde al porcentaje del impuesto al valor agregado vigente para la venta de los productos, es un valor obligatorio.
 -- ID_ESTADO: Valor que indica el estado de IVA, es un valor booleano y es obligatorio.
 -- FECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.
 -- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada IVA.
 -- FECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del IVA, es un valor que solo se actualiza una vez, no es obligatorio al registrar IVA.
 -- 
--- Reglas :
+-- Reglas IVA:
 -- - Solo debe mantenerse un registro de IVA activo en la tabla.
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABLA: COSTO_PRODUCTOS
+-- Tabla que almacena la información relacionada a los costos de los productos, debe mantener un registro histórico y se alimenta de las tablas "PRODUCTOS" e "IVA".
+-- 
+-- ID_COSTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada costo de producto y es la clave primaria.
+-- ID_PRODUCTO: Valor relacionado con la tabla "PRODUCTOS", es un valor entero y obligatorio.
+-- ID_IVA: Valor relacionado con la tabla "IVA", es un valor entero y obligatorio.
+-- COSTO_SIN_IVA: Valor compuesto de enteros y decimales, que indica el costo del producto sin tomar en cuenta el valor del IVA, es un valor obligatorio.
+-- COSTO_CON_IVA: Valor compuesto de enteros y decimales, que indica el costo del producto tomando en cuenta el valor del IVA, es un valor obligatorio.
+-- ID_ESTADO: Valor que indica el estado de un producto, es un valor booleano y es obligatorio.
+-- FECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.
+-- FECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del costo, es un valor que solo se actualiza una vez, no es obligatorio al registrar COSTO_PRODUCTOS.
+-- 
+-- Reglas COSTO_PRODUCTOS:
+-- - Cada producto solo puede tener un precio activo.
+-- - No se debe eliminar ningún registro de los precios anteriores.
+-- - Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `KIOSCO`.`USUARIOS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
-COMMENT = 'TABLA: USUARIOS\nContiene información de todos los usuarios registrados en el sistema. Listado completo de los usuarios, se encuentran clientes, vendedores, empleados y administradores. La información registrada es vital para obtener los datos en caso de utilizar facturaci�' /* comment truncated */ /*n.
+COMMENT = 'TABLA: USUARIOS\nContiene información de todos los usuarios registrados en el sistema. Listado completo de los usuarios, se encuentran clientes, vendedores, empleados y administradores. La información registrada es vital para obtener los datos en caso de utilizar facturaciç /* comment truncated */ /*n.
 
 ID_USUARIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar a cada usuario y es la clave primaria.
 DOCUMENTO_IDENTIDAD: Corresponde al número de cédula de cada usuario, debe ser ser un valor númerico y único de cada usuario, es obligatorio y tiene como longitud máxima 9 caracteres.
@@ -317,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `KIOSCO`.`PRODUCTOS` (
   `ID_PRODUCTO` INT NOT NULL AUTO_INCREMENT,
   `NOMBRE_PRODUCTO` TEXT(500) NOT NULL,
   `DESCRIPCION_PRODUCTO` TEXT(500) NULL DEFAULT NULL,
-  `ID_ESTADO` TINYINT(1) NOT NULL,
+  `ID_ESTADO` TINYINT(1) NOT NULL DEFAULT 1,
   `FECHA_CREACION` DATE NOT NULL,
   `FECHA_ACTUALIZACION` DATE NULL DEFAULT NULL,
   `FECHA_ELIMINACION` DATE NULL DEFAULT NULL,
@@ -401,6 +401,37 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: IVA\nTabla que almacena los IVA\'s antiguos y actual para realizar calculo de los precios.\n\nID_IVA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.\nPORCENTAJE_IVA: \nID_ESTADO: Valor que indica el estado de IVA, es un valor booleano y es obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada IVA.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del IVA, es un valor que solo se actualiza una vez, no es obligatorio al registrar IVA.\n\nReglas :\n- Solo debe mantenerse un registro de IVA activo en la tabla.';
+
+
+-- -----------------------------------------------------
+-- Table `KIOSCO`.`COSTO_PRODUCTOS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `KIOSCO`.`COSTO_PRODUCTOS` (
+  `ID_COSTO` INT NOT NULL AUTO_INCREMENT,
+  `ID_PRODUCTO` INT NOT NULL,
+  `ID_IVA` INT NOT NULL,
+  `COSTO_SIN_IVA` DOUBLE NOT NULL,
+  `COSTO_CON_IVA` DOUBLE NOT NULL,
+  `ID_ESTADO` TINYINT(1) NOT NULL DEFAULT 1,
+  `FECHA_CREACION` DATE NOT NULL,
+  `FECHA_ELIMINACION` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_COSTO`, `ID_PRODUCTO`, `ID_IVA`),
+  INDEX `fk_COSTO_PRODUCTOS_IVA1_idx` (`ID_IVA` ASC),
+  INDEX `fk_COSTO_PRODUCTOS_PRODUCTOS1_idx` (`ID_PRODUCTO` ASC),
+  CONSTRAINT `fk_COSTO_PRODUCTOS_IVA1`
+    FOREIGN KEY (`ID_IVA`)
+    REFERENCES `KIOSCO`.`IVA` (`ID_IVA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_COSTO_PRODUCTOS_PRODUCTOS1`
+    FOREIGN KEY (`ID_PRODUCTO`)
+    REFERENCES `KIOSCO`.`PRODUCTOS` (`ID_PRODUCTO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin
+COMMENT = 'TABLA: COSTO_PRODUCTOS\nTabla que almacena la información relacionada a los costos de los productos, debe mantener un registro histórico y se alimenta de las tablas \"PRODUCTOS\" e \"IVA\".\n\nID_COSTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada costo de producto y es la clave primaria.\nID_PRODUCTO: Valor relacionado con la tabla \"PRODUCTOS\", es un valor entero y obligatorio.\nID_IVA: Valor relacionado con la tabla \"IVA\", es un valor entero y obligatorio.\nCOSTO_SIN_IVA: Valor compuesto de enteros y decimales, que indica el costo del producto sin tomar en cuenta el valor del IVA, es un valor obligatorio.\nCOSTO_CON_IVA: Valor compuesto de enteros y decimales, que indica el costo del producto tomando en cuenta el valor del IVA, es un valor obligatorio.\nID_ESTADO: Valor que indica el estado de un producto, es un valor booleano y es obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del costo, es un valor que solo se actualiza una vez, no es obligatorio al registrar COSTO_PRODUCTOS.\n\nReglas COSTO_PRODUCTOS:\n- Cada producto solo puede tener un precio activo.\n- No se debe eliminar ningún registro de los precios anteriores.\n- Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.';
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
