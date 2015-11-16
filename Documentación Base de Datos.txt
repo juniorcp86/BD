@@ -166,12 +166,14 @@
 -- ID_CUENTA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada cuenta de clientes y es la clave primaria.
 -- ID_USUARIO: Valor relacionado con la tabla "USUARIOS", es un valor entero y obligatorio.
 -- TOTAL_CUENTA: Corresponde a la suma de todos los detalles de cuenta de un solo cliente que no esten pagados.
+-- ID_ESTADO: Valor relacionado con la tabla "ESTADOS", es un valor entero y obligatorio.
 -- FECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.
 -- FECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas, es un valor opcional cuando se crea una nueva cuenta.
 -- FECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.
 -- 
 -- Reglas CUENTAS:
 -- - Un cliente no debe tener más de una cuenta abierta al mismo tiempo.
+-- - Los estados de las cuentas solo pueden ser activos con valor 1 e inactivos con valor 0.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- TABLA: CUENTA_DETALLES
 -- Tabla que los valores unitarios que constituyen el total de la cuenta.
@@ -228,6 +230,7 @@
 -- 
 -- Reglas IVA:
 -- - Solo debe mantenerse un registro de IVA activo en la tabla.
+-- - Los estados de las tasas de IVA solo pueden ser activos con valor 1 e inactivos con valor 0.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- TABLA: COSTO_PRODUCTOS
 -- Tabla que almacena la información relacionada a los costos de los productos, debe mantener un registro histórico y se alimenta de las tablas "PRODUCTOS" e "IVA".

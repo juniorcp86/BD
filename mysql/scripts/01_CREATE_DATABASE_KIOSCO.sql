@@ -76,7 +76,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 --  3. No debe ser jamás un valor inferior al campo "FECHA_ACTUALIZACION".
 -- - Si el campo "FECHA_ELIMINACION" tiene valor, ese dato no debe ser tomado en cuenta para ninguna lista que tenga valores usables en el sistema. A excepción de listas de datos que lo requieran explicítamente.
 -- -----------------------------------------------------
-
 CREATE SCHEMA IF NOT EXISTS KIOSCO DEFAULT CHARACTER SET utf8 ;
 USE KIOSCO ;
 
@@ -110,6 +109,7 @@ Reglas ESTADOS:
 - El estado "Inactivo" en el caso de los usuarios aplica cuando tienen más de un año sin iniciar sesión.
 - El estado "Inactivo" en el caso de los proveedores aplica cuando no se ha realizado ningún pedido desde hace un año.*/;
 
+
 -- -----------------------------------------------------
 -- Table KIOSCO.ROLES
 -- -----------------------------------------------------
@@ -140,6 +140,7 @@ Reglas ROLES:
 - Si se tiene un rol con mayor funcionalidad, eventualmente se heredan las anteriores.
 - Los estados con valor 1 corresponden a Activos.
 - Los estados con valor 0 corresponden a Inactivos.*/;
+
 
 -- -----------------------------------------------------
 -- Table KIOSCO.USUARIOS
@@ -176,7 +177,7 @@ CREATE TABLE IF NOT EXISTS KIOSCO.USUARIOS (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
-COMMENT = 'TABLA: USUARIOS\nContiene información de todos los usuarios registrados en el sistema. Listado completo de los usuarios, se encuentran clientes, vendedores, empleados y administradores. La información registrada es vital para obtener los datos en caso de utilizar facturació'/* comment truncated */ /*n.
+COMMENT = 'TABLA: USUARIOS\nContiene información de todos los usuarios registrados en el sistema. Listado completo de los usuarios, se encuentran clientes, vendedores, empleados y administradores. La información registrada es vital para obtener los datos en caso de utilizar facturació' /* comment truncated */ /*n.
 
 ID_USUARIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar a cada usuario y es la clave primaria.
 DOCUMENTO_IDENTIDAD: Corresponde al número de cédula de cada usuario, debe ser ser un valor númerico y único de cada usuario, es obligatorio y tiene como longitud máxima 9 caracteres.
@@ -199,6 +200,7 @@ Reglas USUARIOS:
 - El dato "ID_ROL" depende de la tabla "ROLES".
 - Cada usuario solo debe tener un "ID_ROL" de acuerdo a las reglas de negocio de la tabla "ROLES".
 - El dato "ULTIMA_SESION" no necesariamente debe tener información desde el registro del usuario, pero si debe actualizarse en cada ocasión que inicie exitosamente la sesión.*/;
+
 
 -- -----------------------------------------------------
 -- Table KIOSCO.PROVEEDORES
@@ -225,6 +227,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: PROVEEDORES\nContiene listado de las empresas y/o proveedores independientes que despachan productos en el Kiosco.\n\nID_PROVEEDOR: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada proveedor agregado en la aplicación y es la clave primaria.\nRIF: Dato alfanumérico que corresponde a información legal del proveedor, es obligatorio y único.\nNOMBRE_PROVEEDOR: Este valor corresponde al nombre de cada proveedor, son tipos de datos de texto y obligatorio.\nID_TIPO_SERVICIO: Valor relacionado con la tabla \"TIPO_SERVICIOS\", es un valor entero y obligatorio.\nID_ESTADO: Valor relacionado con la tabla \"ESTADOS\", es un valor entero y obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de los proveedores, excepto cuando se elimina el proveedor, es un valor opcional cuando se crea el proveedor.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del proveedor, es un valor que solo se actualiza una vez, no es obligatorio al crear el proveedor.\n\nReglas PROVEEDORES:\n- Los usuarios con rol \"Vendedor\" tiene como opción pertenecer a una o más empresas.\n- Los usuarios con rol \"Vendedor\" tiene como opción no pertenecer a ninguna empresa.\n- Los proveedores no son exclusivos de un producto específico.\n- El dato \"ID_ESTADO\" depende de la tabla \"ESTADOS\".';
 
+
 -- -----------------------------------------------------
 -- Table KIOSCO.TIPO_SERVICIOS
 -- -----------------------------------------------------
@@ -240,6 +243,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: TIPO_SERVICIOS\nContiene información de los servicios utilizados por el Kiosco y suministrado por los proveedores. Por ejemplo revistas, tarjetas telefónicas, golosinas nacionales, barajitas, entre otros.\n\nID_TIPO_SERVICIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada tipo de servicio agregado en la aplicación y es la clave primaria.\nNOMBRE_SERVICIO: Este valor corresponde al nombre de cada tipo de servicio, son tipos de datos de texto y obligatorio.\nDESCRIPCION_SERVICIO: Este valor corresponde a la descripción y objetivo de cada tipo de servicio, son tipos de datos de texto y obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de los tipos de servicios, excepto cuando se elimina el servicio, es un valor opcional cuando se crea un nuevo tipo.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del tipo de servicio, es un valor que solo se actualiza una vez, no es obligatorio al crear el tipo de servicio.\n\nReglas TIPO_SERVICIOS:\n- Un proveedor puede suministrar más de un tipo de servicio.\n- El mismo tipo de servicio lo puede ofrecer más de un proveedor.';
+
 
 -- -----------------------------------------------------
 -- Table KIOSCO.CONTACTO_PROVEEDOR
@@ -266,6 +270,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: CONTACTO_PROVEEDOR\nContiene información adicional de los proveedores como:\n- Números telefónicos.\n- Correos electrónicos.\n- Persona de contacto.\n\nID_CONTACTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada contacto de un proveedor y es la clave primaria.\nID_PROVEEDOR: Valor relacionado con la tabla \"PROVEEDORES\", es un valor entero y obligatorio. Parte de la clave primaria.\nPERSONA_CONTACTO: Nombre y apellido del supervisor del vendedor en la empresa, es un valor obligatorio con datos de texto\nNUMERO_PROVEEDOR_1: Número telefónico principal del proveedor o supervisor del vendedor, es un dato obligatorio y solo permite números.\nNUMERO_PROVEEDOR_2: Número telefónico adicional del proveedor o supervisor del vendedor, es un dato opcional y solo permite números.\nNUMERO_PROVEEDOR_3: Número telefónico adicional del proveedor o supervisor del vendedor, es un dato opcional y solo permite números.\nCORREO_ELECTRONICO_1: Correo electrónico principal del proveedor o supervisor del vendedor, es un dato obligatorio, no debe permitir caracteres especiales, a excepción del carácter \"@\" y dominio.\nCORREO_ELECTRONICO_2: Correo electrónico adicional del proveedor o supervisor del vendedor, es un dato opcional, no debe permitir caracteres especiales, a excepción del carácter \"@\" y dominio.\nCORREO_ELECTRONICO_3: Correo electrónico adicional del proveedor o supervisor del vendedor, es un dato opcional, no debe permitir caracteres especiales, a excepción del carácter \"@\" y dominio.\n\nReglas CONTACTO_PROVEEDOR:\n- El dato \"ID_PROVEEDOR\" depende de la tabla \"PROVEEDORES\".\n- Persona de contacto siempre debe ser supervisor a excepción del caso donde el proveedor sea independiente, en cuyo caso aplica el mismo vendedor.\n- Es necesario al menos un número telefónico y correo electrónico como contacto en caso que el vendedor preste un mal servicio u otro inconveniente.';
 
+
 -- -----------------------------------------------------
 -- Table KIOSCO.PROVEEDORES_TIPO_SERVICIOS
 -- -----------------------------------------------------
@@ -290,6 +295,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: PROVEEDORES_TIPO_SERVICIOS\nTabla relacional que permite cumplir con las reglas de negocio de los tipos de servicios.\n\nPROVEEDORES_ID_PROVEEDOR: Valor relacionado con la tabla \"PROVEEDORES\", es un valor entero y obligatorio.\nTIPO_SERVICIOS_ID_TIPO_SERVICIO: Valor relacionado con la tabla \"TIPO_SERVICIOS\", es un valor entero y obligatorio.\n\nReglas PROVEEDORES_TIPO_SERVICIOS:\n- Un proveedor puede suministrar más de un tipo de servicio.\n- El mismo tipo de servicio lo puede ofrecer más de un proveedor.';
 
+
 -- -----------------------------------------------------
 -- Table KIOSCO.CUENTAS
 -- -----------------------------------------------------
@@ -297,6 +303,7 @@ CREATE TABLE IF NOT EXISTS KIOSCO.CUENTAS (
   ID_CUENTA INT NOT NULL AUTO_INCREMENT,
   ID_USUARIO INT NOT NULL,
   TOTAL_CUENTA DOUBLE NOT NULL,
+  ID_ESTADO TINYINT(1) NOT NULL DEFAULT 1,
   FECHA_CREACION DATE NOT NULL,
   FECHA_ACTUALIZACION DATE NULL DEFAULT NULL,
   FECHA_CIERRE DATE NULL DEFAULT NULL,
@@ -309,7 +316,8 @@ CREATE TABLE IF NOT EXISTS KIOSCO.CUENTAS (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = armscii8
-COMMENT = 'TABLA: CUENTAS\nTabla que contiene total de la cuenta de cada usuario cliente. Debe estar relacionada con la tabla CUENTAS_DETALLE.\n\nID_CUENTA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada cuenta de clientes y es la clave primaria.\nID_USUARIO: Valor relacionado con la tabla \"USUARIOS\", es un valor entero y obligatorio.\nTOTAL_CUENTA: Corresponde a la suma de todos los detalles de cuenta de un solo cliente que no esten pagados.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas, es un valor opcional cuando se crea una nueva cuenta.\nFECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.\n\nReglas :\n- Un cliente no debe tener más de una cuenta abierta al mismo tiempo.';
+COMMENT = 'TABLA: CUENTAS\nTabla que contiene total de la cuenta de cada usuario cliente. Debe estar relacionada con la tabla CUENTAS_DETALLE.\n\nID_CUENTA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada cuenta de clientes y es la clave primaria.\nID_USUARIO: Valor relacionado con la tabla \"USUARIOS\", es un valor entero y obligatorio.\nTOTAL_CUENTA: Corresponde a la suma de todos los detalles de cuenta de un solo cliente que no esten pagados.\nID_ESTADO: Valor relacionado con la tabla \"ESTADOS\", es un valor entero y obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas, es un valor opcional cuando se crea una nueva cuenta.\nFECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.\n\nReglas CUENTAS:\n- Un cliente no debe tener más de una cuenta abierta al mismo tiempo.\n- Los estados de las cuentas solo pueden ser activos con valor 1 e inactivos con valor 0.';
+
 
 -- -----------------------------------------------------
 -- Table KIOSCO.PRODUCTOS
@@ -327,6 +335,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: PRODUCTOS\nTabla que el listado de productos de KIOSCO.\n\nID_PRODUCTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.\nNOMBRE_PRODUCTO: Identifica el tipo de detalle para sumar o restar montos, es un valor booleano y obligatorio.\nDESCRIPCION_PRODUCTO: Valor tipo texto que permite ingresar información adicional del producto, NO es un valor obligatorio.\nID_ESTADO: Valor que indica el estado de un producto, es un valor booleano y es obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada producto.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del producto, es un valor que solo se actualiza una vez, no es obligatorio al crear el producto.\n\nReglas :\n- El mismo proudcto puede ser distribuido por más de un proveedor.\n- Muchos productos son distribuidos por muchos vendedores.\n- Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.';
+
 
 -- -----------------------------------------------------
 -- Table KIOSCO.CUENTA_DETALLES
@@ -360,6 +369,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: CUENTA_DETALLES\nTabla que los valores unitarios que constituyen el total de la cuenta.\n\nID_CUENTA_DETALLE: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada detalle de cuenta y es la clave primaria.\nID_CUENTA: Valor relacionado con la tabla \"CUENTA\", es un valor entero y obligatorio.\nID_USUARIO: Valor relacionado con la tabla \"CUENTA\", es un valor entero y obligatorio.\nID_PRODUCTO: Valor relacionado con la tabla \"PRODUCTOS\", es un valor entero y obligatorio.\nTIPO_DETALLE: Identifica el tipo de detalle para sumar o restar montos, es un valor booleano y obligatorio.\nDESCRIPCION: Utilizado para almacenar información general cuando el producto seleccionado sea algo genérico y no se específiquen individualmente los productos, NO es obligatorio.\nMONTO_DETALLE: Valor decimal que contiene el costo del producto o abono en la cuenta, es un valor obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información del detalle de las cuentas.\nFECHA_CIERRE: Valor que corresponde a la fecha en la que se pagó por completo y se puede cerrar la deuda.\n\nReglas :\n- En valor \"TIPO_DETALLE\" corresponde 1 cuando se agrega algún producto y 0 cuando se hace un abono.';
 
+
 -- -----------------------------------------------------
 -- Table KIOSCO.PROVEEDORES_PRODUCTOS
 -- -----------------------------------------------------
@@ -384,13 +394,14 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: PROVEEDORES_PRODUCTOS\nTabla que almacena las relaciones de los productos con los proveedores.\n\nPROVEEDORES_ID_PROVEEDOR: Valor relacionado con la tabla \"PROVEEDORES\", es un valor entero y obligatorio.\nPRODUCTOS_ID_PRODUCTO: Valor relacionado con la tabla \"PRODUCTOS\", es un valor entero y obligatorio.\n\nReglas :\n- El mismo proudcto puede ser distribuido por más de un proveedor.\n- Muchos productos son distribuidos por muchos vendedores.';
 
+
 -- -----------------------------------------------------
 -- Table KIOSCO.IVA
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS KIOSCO.IVA (
   ID_IVA INT NOT NULL AUTO_INCREMENT,
   PORCENTAJE_IVA DOUBLE NOT NULL,
-  ID_ESTADO TINYINT(1) NOT NULL,
+  ID_ESTADO TINYINT(1) NOT NULL DEFAULT 1,
   FECHA_CREACION DATE NOT NULL,
   FECHA_ACTUALIZACION DATE NULL DEFAULT NULL,
   FECHA_ELIMINACION DATE NULL DEFAULT NULL,
@@ -398,7 +409,8 @@ CREATE TABLE IF NOT EXISTS KIOSCO.IVA (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
-COMMENT = 'TABLA: IVA\nTabla que almacena los IVA antiguos y actual para realizar calculo de los precios.\n\nID_IVA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.\nPORCENTAJE_IVA: \nID_ESTADO: Valor que indica el estado de IVA, es un valor booleano y es obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada IVA.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del IVA, es un valor que solo se actualiza una vez, no es obligatorio al registrar IVA.\n\nReglas :\n- Solo debe mantenerse un registro de IVA activo en la tabla.';
+COMMENT = 'TABLA: IVA\nTabla que almacena los IVAs antiguos y actual para realizar calculo de los precios.\n\nID_IVA: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada producto y es la clave primaria.\nPORCENTAJE_IVA: Corresponde al porcentaje del impuesto al valor agregado vigente para la venta de los productos, es un valor obligatorio.\nID_ESTADO: Valor que indica el estado de IVA, es un valor booleano y es obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ACTUALIZACION: Valor que corresponde a cada ocasión que se realiza alguna actualización en la información de cada IVA.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del IVA, es un valor que solo se actualiza una vez, no es obligatorio al registrar IVA.\n\nReglas IVA:\n- Solo debe mantenerse un registro de IVA activo en la tabla.\n- Los estados de las tasas de IVA solo pueden ser activos con valor 1 e inactivos con valor 0.';
+
 
 -- -----------------------------------------------------
 -- Table KIOSCO.COSTO_PRODUCTOS
@@ -429,6 +441,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin
 COMMENT = 'TABLA: COSTO_PRODUCTOS\nTabla que almacena la información relacionada a los costos de los productos, debe mantener un registro histórico y se alimenta de las tablas \"PRODUCTOS\" e \"IVA\".\n\nID_COSTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada costo de producto y es la clave primaria.\nID_PRODUCTO: Valor relacionado con la tabla \"PRODUCTOS\", es un valor entero y obligatorio.\nID_IVA: Valor relacionado con la tabla \"IVA\", es un valor entero y obligatorio.\nCOSTO_SIN_IVA: Valor compuesto de enteros y decimales, que indica el costo del producto sin tomar en cuenta el valor del IVA, es un valor obligatorio.\nCOSTO_CON_IVA: Valor compuesto de enteros y decimales, que indica el costo del producto tomando en cuenta el valor del IVA, es un valor obligatorio.\nID_ESTADO: Valor que indica el estado de un producto, es un valor booleano y es obligatorio.\nFECHA_CREACION: Valor que corresponde al registro de la información en base de datos, es obligatorio, pero no debe ser actualizado en ninguna otra ocasión.\nFECHA_ELIMINACION: Valor que corresponde a la fecha en la que se realizó la eliminación lógica del costo, es un valor que solo se actualiza una vez, no es obligatorio al registrar COSTO_PRODUCTOS.\n\nReglas COSTO_PRODUCTOS:\n- Cada producto solo puede tener un precio activo.\n- No se debe eliminar ningún registro de los precios anteriores.\n- Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.';
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
