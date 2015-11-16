@@ -5,7 +5,7 @@
 * CREADO POR: Junior Casique
 * FECHA DE ACTUALIZACIÓN: 
 * ACTUALIZADO POR: 
-* DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 12_INSERT_DATA_TIPO_SERVICIOS.sql
+* DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 05_INSERT_DATA_TIPO_SERVICIOS.sql
 */
 
 USE KIOSCO;

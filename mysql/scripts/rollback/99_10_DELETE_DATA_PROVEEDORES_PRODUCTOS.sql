@@ -5,7 +5,7 @@
 * CREADO POR: Junior Casique
 * FECHA DE ACTUALIZACIÓN: 
 * ACTUALIZADO POR: 
-* DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 17_INSERT_DATA_PROVEEDORES_PRODUCTOS.sql
+* DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 10_INSERT_DATA_PROVEEDORES_PRODUCTOS.sql
 */
 
 USE KIOSCO;
