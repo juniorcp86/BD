@@ -1,0 +1,13 @@
+/*
+* NOMBRE BASE DE DATOS: KIOSCO
+* NOMBRE DE LA TABLA: COSTO_PRODUCTOS
+* FECHA DE CREACIÓN: 17/11/2015
+* CREADO POR: Junior Casique
+* FECHA DE ACTUALIZACIÓN: 
+* ACTUALIZADO POR: 
+* DESCRIPCIÓN: Script para realizar la eliminación de los datos en la tabla mencionada. Es el rollback del script 19_INSERT_DATA_COSTO_PRODUCTOS.sql
+*/
+
+USE KIOSCO;
+
+DELETE FROM KIOSCO.COSTO_PRODUCTOS WHERE ID_COSTO = '1';
