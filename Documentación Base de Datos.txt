@@ -135,8 +135,8 @@
 -- - Correos electrónicos.
 -- - Persona de contacto.
 -- 
--- ID_CONTACTO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada contacto de un proveedor y es la clave primaria.
--- ID_PROVEEDOR: Valor relacionado con la tabla "PROVEEDORES", es un valor entero y obligatorio. Parte de la clave primaria.
+-- USUARIOS_ID_USUARIO: Valor relacionado con la tabla "USUARIOS", es un valor entero y obligatorio. Parte de la clave primaria.
+-- PROVEEDORES_ID_PROVEEDOR: Valor relacionado con la tabla "PROVEEDORES", es un valor entero y obligatorio. Parte de la clave primaria.
 -- PERSONA_CONTACTO: Nombre y apellido del supervisor del vendedor en la empresa, es un valor obligatorio con datos de texto
 -- NUMERO_PROVEEDOR_1: Número telefónico principal del proveedor o supervisor del vendedor, es un dato obligatorio y solo permite números.
 -- NUMERO_PROVEEDOR_2: Número telefónico adicional del proveedor o supervisor del vendedor, es un dato opcional y solo permite números.
