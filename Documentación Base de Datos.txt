@@ -249,3 +249,23 @@
 -- - No se debe eliminar ningún registro de los precios anteriores.
 -- - Los estados de los productos solo pueden ser activos con valor 1 e inactivos con valor 0.
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABLA: INVENTARIO
+-- Tabla que almacena la información relacionada a la cantidad de productos en existencia del depósito.
+-- 
+-- ID_INVENTARIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada inventario y es la clave primaria.
+-- CAJA: Valor numérico que identifica la caja en la cual se encuentra almacenado fisicamente el producto. 
+-- CANTIDAD_DISPONIBLE: Valor numérico que representa el total de productos en inventario de cada producto. 
+-- UNIDAD_PRODUCTO: Corresponde a la informacon que identifica si un producto esta almacenado por unidad, caja, peso, etc.
+-- 
+-- Reglas INVENTARIO:
+-- - El mismo producto puede estar almacenado as de una vez, pero con diferente unidad.
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABLA: INVENTARIO_PRODUCTOS
+-- Tabla que almacena la información relacionada entre "PRODUCTOS" e "INVENTARIO".
+-- 
+-- INVENTARIO_ID_INVENTARIO: Es un valor autoincremental numérico, no debe ser NULL en ninguna ocasión, es único para identificar cada inventario y es la clave primaria.
+-- PRODUCTOS_ID_PRODUCTO: Valor numérico que identifica la caja en la cual se encuentra almacenado fisicamente el producto. 
+-- 
+-- Reglas INVENTARIO_PRODUCTOS:
+-- - Los mismos productos pueden estar en más de una caja.
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
